@@ -1,0 +1,13 @@
+HTTP/1.1 302 Found 
+Location: http://localhost:3000/
+Content-Type: text/html; charset=utf-8
+X-Ua-Compatible: IE=Edge
+Cache-Control: no-cache
+X-Request-Id: f802c792053c016a4e57f802d76c65ae
+X-Runtime: 0.003436
+Server: WEBrick/1.3.1 (Ruby/1.9.3/2012-11-10)
+Date: Fri, 24 May 2013 13:18:30 GMT
+Content-Length: 88
+Connection: Keep-Alive
+Set-Cookie: _gophermq_session=BAh7B0kiD3Nlc3Npb25faWQGOgZFRkkiJTNjOGRjNTRjNWQ1NjBhNmUxMzQzYjIwZjI3NjAyZTZlBjsAVEkiCmZsYXNoBjsARm86JUFjdGlvbkRpc3BhdGNoOjpGbGFzaDo6Rmxhc2hIYXNoCToKQHVzZWRvOghTZXQGOgpAaGFzaHsAOgxAY2xvc2VkRjoNQGZsYXNoZXN7BjoLbm90aWNlSSIoUGxlYXNlIGxvZ2luIHRvIGFjY2VzcyB0aGlzIHNlY3Rpb24GOwBGOglAbm93MA%3D%3D--1e26a24400118a3a67c3e7120ee67b70c1481874; path=/; HttpOnly
+

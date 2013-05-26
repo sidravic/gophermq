@@ -1,0 +1,25 @@
+<h2> <%= @gopher_queue.name %> </h2>
+
+<table class="table table-condensed">
+	<thead>
+		<tr>
+			<th> id </th>
+			<th> Queue name </th>
+			<th> Added On</th>
+			<th> Actions </th>
+		<tr>
+	</thead>
+	<tbody>
+		<% @subscribers.each do |q| %>
+			<tr>
+				<td> <%= q.id %> </td>
+				<td> <%= q.name %> </td>				
+				<td> <%= time_ago_in_words(q.created_at) %></td>
+				<td> <%= link_to "Remove Subscriber", "#" %> </td>
+			</tr>
+		<% end %>
+	</tbody> 
+</table>
+
+
+<%= link_to "Add a job", "#" %>

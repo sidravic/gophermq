@@ -1,0 +1,38 @@
+<div class="jumbotron">
+    <h1>Message Queues in the cloud</h1>
+    <p class="lead">
+    	Reliable, fast and easy to integrate cloud based message queues. And the we're free while were in Alpha.
+    </p>
+    <% if current_user.present? %>
+    	<!-- <a class="btn btn-large btn-success" href="#">Create a new project</a> -->
+    	<%= link_to "Create New Project", new_user_project_url(current_user), :class => "btn btn-large btn-success" %>
+    <% else %>    	
+    	<%= link_to "Signup for Free", new_user_registration_url, :class => "btn btn-large btn-success" %>
+    <% end %>
+</div>
+
+<hr>
+
+<div class="row-fluid">
+    <div class="span4">
+          <h2>REST apis</h2>
+          <p>Easy to integrate REST APIs and client libraries that let you use GopherMQ from any kind of web application that requires message queues.</p>
+          <p>
+          	<a class="btn" href="#">View details »</a>
+          </p>
+    </div>
+    <div class="span4">
+	    <h2>Poll or Subscribe</h2>
+    	<p>Poll using our REST APIs to fetch the latest messages or subscribe to a message queue and have the updates pushed via HTTP requests or our Socket API.  </p>
+      	<p>
+      		<a class="btn" href="#">View details »</a>
+      	</p>
+   </div>
+    <div class="span4">
+      	<h2>Dashboard</h2>
+      	<p>Stay up to date and in control of every message and queue that you generate through a rich and easy interface. Delete or create queues, update messages and be notified of failures etc. </p>
+      	<p>
+      		<a class="btn" href="#">View details »</a>
+      	</p>
+    </div>
+      </div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GopherMQ</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="container">
+		<div class="masthead">
+			<h3 class="muted"> GopherMQ </h3>
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<ul class="nav">
+							<li>
+								<%= link_to "Home", root_url %>
+							</li>
+							<% if user_signed_in? %>
+								<li>
+									<%= link_to "Projects", user_projects_url(current_user) %>
+								</li>
+							<% end %>
+							<li>
+								<a href="#"> API </a>
+							</li>
+							<li>
+								<a href="#"> Dashboard </a>
+							</li>
+							<li>
+								<a href="#"> About </a>
+							</li>
+							<li>
+								<a href="#"> Contact </a>
+							</li>							
+						</ul>
+						
+						<ul class="nav pull-right">
+							<li>
+								<% if user_signed_in? %>								
+									<%= link_to "Logout", destroy_user_session_url, :method => :delete %>							
+								<% else %>
+									<%= link_to "SignIn/Register", new_user_registration_url %>									
+								<% end %>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<%= render :partial => "shared/page_notification" %>
+			<%= yield %>			
+		</div>
+
+		<div class="footer">
+        	<p>©Idyllic Software 2013</p>
+      </div>
+	</div>
+</body>
+</html>
