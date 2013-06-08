@@ -14,10 +14,11 @@ module Datastore
 			list(key)
 		end
 
-		def notify!
-			key = Datastore::Key.generate(self.gopher_queue)
-			pubsub = Datastore::Pubsub.new
-			pubsub.publish("gophermq_notifiable_notification", "#{key}")
+		def notify!(notify_uri)
+			key 	= Datastore::Key.generate(self.gopher_queue)
+			message = {:notify_uri => notify_uri, :key => key}.to_json
+			pubsub 	= Datastore::Pubsub.new
+			pubsub.publish("gophermq_notifiable_notification", message)
 		end
 
 		def subscribe!

@@ -10,6 +10,7 @@ class Job < ActiveRecord::Base
   def enqueue
   	message = Datastore::Message.new(self)
   	message.enqueue
+    message.send_subscription_notification if self.gopher_queue.subscribed?
   end
 
   def clear

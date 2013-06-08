@@ -20,8 +20,7 @@ class GopherQueue < ActiveRecord::Base
   	self.name.to_s
   end
 
-  def validate_notify_uri   
-    binding.pry  
+  def validate_notify_uri       
     self.errors.add(:notify_uri, "Invalid notify uri format") if self.notify_uri.blank? && self.queuetype == :notifiable.to_s
   end
 
@@ -54,7 +53,7 @@ class GopherQueue < ActiveRecord::Base
     transaction do       
       if self.update_attributes(:queuetype => :notifiable.to_s)
          message_queue = Datastore::MessageQueue.new(self)
-         message_queue.notify!
+         message_queue.notify!(self.notify_uri)
          status = true
        end
     end

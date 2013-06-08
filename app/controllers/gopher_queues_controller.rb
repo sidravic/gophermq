@@ -170,6 +170,55 @@ class GopherQueuesController < ApplicationController
     end
 
 
+    #############################################################################################
+    # PUT /projects/:project_id/queues/:queue_name/subscribe
+    # // Replace project_id with :application_id    
+    #
+    # This methods updates a queue into a subscribed queue. The queue then becomes available for
+    # realtime notifications via websockets
+    # 
+    #
+    #############################################################################################
+    def subscribe
+        @gopher_queue = @project.gopher_queues.where(:name => params[:queue_name]).last
+        raise ActiveRecord::RecordNotFound, "QueueNotFound" if @gopher_queue.nil?
+
+        if !@gopher_queue.subscribed?
+            if @gopher_queue.update_attributes(:queuetype => "subscribed")
+                render :json => {:operation_status => true, :gopher_queue => @gopher_queue.attributes.except("project_id")}, :status => :ok
+            else
+                render :json => {:operation_status => false, :gopher_queue => @gopher_queue.attributes.except("project_id"), :errors => @gopher_queue.errors.full_messages.join(". ")}, :status => :unprocessable_entity
+            end
+        else
+            render :json => {:operation_status => false, :gopher_queue => @gopher_queue.attributes.except("project_id")}, :status => :ok
+        end
+    end
+
+    #############################################################################################
+    # PUT /projects/:project_id/queues/:queue_name/unsubscribe
+    # // Replace project_id with :application_id    
+    #
+    # This methods updates a queue into a subscribed queue. The queue then becomes available for
+    # realtime notifications via websockets
+    # 
+    #
+    #############################################################################################
+    def unsubscribe
+        @gopher_queue = @project.gopher_queues.where(:name => params[:queue_name]).last
+        raise ActiveRecord::RecordNotFound, "QueueNotFound" if @gopher_queue.nil?
+
+        if @gopher_queue.subscribed?
+            if @gopher_queue.update_attributes(:queuetype => "standard")
+                render :json => {:operation_status => true, :gopher_queue => @gopher_queue.attributes.except("project_id")}, :status => :ok
+            else
+                render :json => {:operation_status => false, :gopher_queue => @gopher_queue.attributes.except("project_id"), :errors => @gopher_queue.errors.full_messages.join(". ")}, :status => :unprocessable_entity
+            end
+        else
+            render :json => {:operation_status => false, :gopher_queue => @gopher_queue.attributes.except("project_id")}, :status => :ok
+        end
+    end
+
+
     def require_application
         @project = Project.where(:application_id => params[:project_id]).last    
     end

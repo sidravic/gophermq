@@ -9,7 +9,9 @@ Gophermq::Application.routes.draw do
     resources :queues, :except => [:destroy], :controller => "gopher_queues" do
       match "/:queue_name", :to => "gopher_queues#destroy", :via => :delete, :on => :collection
       match "/:queue_name/notify", :to => "gopher_queues#notify", :via => :put, :as => :notify, :on => :collection
-      match "/:queue_name/denotify", :to => "gopher_queues#denotify", :via => :put, :as => :denotify, :on => :collection         
+      match "/:queue_name/denotify", :to => "gopher_queues#denotify", :via => :put, :as => :denotify, :on => :collection
+      match "/:queue_name/subscribe", :to => "gopher_queues#subscribe", :via => :put, :as => :subscribe, :on => :collection
+      match "/:queue_name/unsubscribe", :to => "gopher_queues#unsubscribe", :via => :put, :as => :unsubscribe, :on => :collection         
 
       match "/:queue_name/subscriptions", :to => "subscriptions#create", :via => :post, :as => :subscriptions, :on => :collection
       match "/:queue_name/subscriptions/:id", :to => "subscriptions#destroy", :via => :delete, :as => :subscription, :on => :collection

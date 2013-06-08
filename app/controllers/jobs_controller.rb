@@ -38,6 +38,7 @@ class JobsController < ApplicationController
   	    @job = @gopher_queue.jobs.build(:data => params[:data])
   	    if @job.save
             @job.enqueue
+            @gopher_queue.notify! if @gopher_queue.notifiable?
   		    render :json => {:operation_status => true, :job => @job, :queue => @gopher_queue.attributes.except("project_id")},	:status => :ok
   	    else
   		    render :json => {:operation_status => false, :errors => @job.errors.full_messages.join(". ")}, 

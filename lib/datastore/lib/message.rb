@@ -10,9 +10,15 @@ module Datastore
 		end
 
 		def enqueue
-			key = Datastore::Key.generate(self.job.gopher_queue)
-			binding.pry
+			key = Datastore::Key.generate(self.job.gopher_queue)			
 			push(key, self.job.data)
+		end
+
+		def send_subscription_notification			
+			key    = Datastore::Key.generate_subscription_key(self.job.gopher_queue)
+			pubsub = Datastore::Pubsub.new
+			msg    = {:job => self.job.data}.to_json
+			pubsub.publish(key, msg)			
 		end
 
 		def get
