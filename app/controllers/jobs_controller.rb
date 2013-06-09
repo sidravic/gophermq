@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+    before_filter :protect_with_http_basic_auth, :only => [:create, :fetch, :destroy]
     before_filter :get_queue, :except => :index
 
     def index        

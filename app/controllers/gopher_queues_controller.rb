@@ -1,4 +1,5 @@
-class GopherQueuesController < ApplicationController  
+class GopherQueuesController < ApplicationController 
+    before_filter :protect_with_http_basic_auth, :only => [:create, :destroy, :notify, :denotify, :subscribe, :unsubscribe] 
     before_filter :require_user, :only => [:index]
     before_filter :require_application, :except => [:new]
     protect_from_forgery :only => :index

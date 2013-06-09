@@ -1,8 +1,14 @@
-Gophermq::Application.routes.draw do  
+Gophermq::Application.routes.draw do    
   devise_for :users
 
   resources :users do
     resources :projects
+  end 
+
+  scope "api" do
+    scope "v1" do
+      resources "docs", :only => :index, :controller => "api/v1/docs"
+    end
   end
 
   resources :projects, :only => [] do
