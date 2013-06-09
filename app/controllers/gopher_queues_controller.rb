@@ -72,7 +72,7 @@ class GopherQueuesController < ApplicationController
     end
 
   #############################################################################################
-  #  DELETE /projects/:project_id/queues/:id
+  #  DELETE /projects/:project_id/queues/:queue_name
   #  Replace :project_id with :application_id
   #  Data: {  
   #           //No data expected
