@@ -2,8 +2,10 @@ Gophermq::Application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :projects
+    resources :projects     
   end 
+
+  match "/authenticate" => "projects#authenticate", :via => :post, :as => :authenticate
 
   scope "api" do
     scope "v1" do

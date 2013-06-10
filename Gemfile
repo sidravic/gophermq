@@ -26,6 +26,8 @@ end
 
 group :development do
 	gem "pry"
+	gem "unicorn"
+	gem "localtunnel"
 end
 
 
