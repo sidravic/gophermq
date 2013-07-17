@@ -1,0 +1,127 @@
+<div class="row">
+	<div class="span3 bs-docs-sidebar">
+		<ul class="nav nav-list bs-docs-sidenav affix-top">
+			<li class="active">
+				<a href="#getting-started">Getting Started </a>
+			</li>
+
+			<li>
+				<a href="#authentication"> Authentication </a>
+			</li>
+			
+			<li>
+				<a href="#queues"> Queues </a>
+			</li>
+
+			<li>
+				<a href="#jobs">Jobs</a>
+			</li>
+
+			<li>
+				<a href="#subscriptions">Subscriptions</a>
+			</li>			
+
+			<li>
+				<a href="#notifications">Notifications</a>
+			</li>			
+		</ul>
+	</div>
+	
+	<div class="span9">
+		<section id="global">
+			<div class="page-header">
+				<h3> API Documentation </h3>
+
+				<h4 id="#getting-started"> Getting Started </h4>
+				<p>
+					To get started with using GopherMQ all you need to do is to <a href="/users/signup">signup </a> to obtain an <code>application_id </code> and an <code> private key </code>. The <code> application_id </code> and the <code> private key</code> are used in every request in order to authenticate requests for all endpoints available as part of the REST API.
+				</p>
+
+				<p> &nbsp; </p>
+				<h4 id="#authentication"> Authentication </h4>
+				<p>
+					GopherMQ uses HTTP Basic Auth as a means to authenticate to all requests in the REST API. We pass the <code> application_id </code> and the <code> private_key </code> as header with each request. 
+				</p>
+
+				<p> A sample curl request. <br/>
+					<code>
+						curl -d "application_id=4bd58999bc1369473931&data=Viva la Vida" <br/>
+						http://localhost:3000/queues/rapidmq/jobs --user 4bd58999bc1369473931:bd4b578ac062c905ff6a7507daf0d006
+					</code>
+				</p>
+
+				<p> &nbsp; </p>
+				<h4 id="#queues"> Queues </h4>
+				<p>
+					<strong> POST </strong> /projects/:application_id/queues
+					<br/> <br/>
+
+					Creates a new message/job queue. Message queues can contain multiple messages/jobs. Passing the job data is optional and a queue can be created without passing the <code> job_data </code>. Passing a <code> job_data </code> value ensures that the queue is populated with <code> job_data</code> as the first job/message.
+					<br/>					
+						<code>														
+							curl -d "application_id=AXX23334SQXSS233S7Z&name=rapidmq&job_data=Viva la vida" http://staging.gophermq.com/projects/AXX23334SQXSS233S7Z/queues						
+  						</code>
+				</p>
+
+				<p> &nbsp; </p>
+
+				<p>
+					<strong>DELETE</strong> /projects/:application_id/queues/:queue_name
+					<br/><br/>
+
+					Deletes a message/job queue. This will also delete all the messages in the queue. <br/>
+					<code>
+						curl -d "application_id=AXX23334SQXSS233S7Z" http://staging.gophermq.com/projects/AXX23334SQXSS233S7Z/queues/rapidmq
+					</code>
+					<br/> <br/>
+				</p>
+
+				
+				<p> &nbsp; </p>
+				<h4 id="jobs"> Jobs </h4>
+
+				<p> <strong> POST</strong> /queues/:queue_name/jobs 
+					<br/> <br/>
+
+					Push a new job into your queue.
+					<code>
+						curl -d "application_id=AXX23334SQXSS233S7Z&data=SomeJobData" http://staging.gophermq.com/queues/rapidmq/jobs
+					</code>
+					<br/><br/>
+				</p>
+
+				<p> <strong>GET</strong> /queues/:queue_name/jobs/:id/fetch
+					<br/><br/>
+
+					The allows you to lookup or fetch the next job in the queue without actually poping the queue. This means that you can take a peek at the next item waiting to be processed without actually taking it off the queue.
+					<code>
+						curl -d "application_id=AXX23334SQXSS233S7Z" http://staging.gophermq.com/rapidmq/jobs/22/fetch
+					</code>
+					<br/> <br/>
+				</p>
+
+				<p> <strong>DELETE</strong> DELETE /queues/:queue_name/jobs/:id
+					<br/><br/>
+
+					This is deletes a job from the queue after its been processed. Unlike a regular queue you would have to <code> fetch </code> a job from the queue. Process it. And then delete it from your queue. This ensures that job does not get popped off the queue until its been successfully processed.
+
+					<code>
+						curl -d "application_id=AXX23334SQXSS233S7Z" http://staging.gophermq.com/rapidmq/jobs/22
+					</code>
+					<br/><br/>
+				</p>
+
+				<p> <strong>GET</strong> /queues/:queue_name/jobs/list
+					<br/><br/>
+
+					This allows you to fetch all the jobs/messages enqueued in a particular queue. This does not pop the jobs off the queue either.
+
+					<code>
+						curl -d "application_id=AXX23334SQXSS233S7Z" http://staging.gophermq.com/rapidmq/jobs/list
+					</code>
+				</p>
+
+			</div>
+		</section>
+	</div>
+</div>
